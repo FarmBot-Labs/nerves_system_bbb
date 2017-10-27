@@ -1,4 +1,4 @@
-defmodule NervesSystemBbb.Mixfile do
+defmodule NervesSystemFarmbotBbb.Mixfile do
   use Mix.Project
 
   @version Path.join(__DIR__, "VERSION")
@@ -6,7 +6,7 @@ defmodule NervesSystemBbb.Mixfile do
     |> String.trim
 
   def project do
-    [app: :nerves_system_bbb,
+    [app: :nerves_system_farmbot_bbb,
      version: @version,
      elixir: "~> 1.3",
      compilers: Mix.compilers ++ [:nerves_package],
@@ -41,6 +41,6 @@ defmodule NervesSystemBbb.Mixfile do
              "VERSION", "fwup.conf", "post-createfs.sh", "uboot",
              "uboot-script.cmd", "linux"],
      licenses: ["Apache 2.0"],
-     links: %{"Github" => "https://github.com/nerves-project/nerves_system_bbb"}]
+     links: %{"Github" => "https://github.com/nerves-project/nerves_system_farmbot_bbb"}]
   end
 end
