@@ -39,7 +39,7 @@ defmodule NervesSystemFarmbotBbb.Mixfile do
      files: ["rootfs_overlay", "bbb-busybox.config", "LICENSE",
              "mix.exs", "nerves_defconfig", "nerves.exs", "README.md",
              "VERSION", "fwup.conf", "post-createfs.sh", "post-build.sh", "uboot",
-             "uboot-script.cmd", "linux"],
+             "uboot-script.cmd", "linux", "buildroot-packages"],
      licenses: ["Apache 2.0"],
      links: %{"Github" => "https://github.com/nerves-project/nerves_system_farmbot_bbb"}]
   end
