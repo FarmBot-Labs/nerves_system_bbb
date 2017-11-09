@@ -1,3 +1,3 @@
-[submodule "buildroot-patches"]
-	path = buildroot-patches
-	url = git@github.com:FarmBot-Labs/buildroot-patches.git
+[submodule "buildroot-packages"]
+	path = buildroot-packages
+	url = git@github.com:FarmBot-Labs/buildroot-packages.git
