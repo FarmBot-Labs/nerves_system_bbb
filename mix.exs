@@ -1,30 +1,50 @@
 defmodule NervesSystemFarmbotBbb.Mixfile do
   use Mix.Project
 
+  @app :nerves_system_farmbot_bbb
   @version Path.join(__DIR__, "VERSION")
     |> File.read!
     |> String.trim
 
   def project do
-    [app: :nerves_system_farmbot_bbb,
-     version: @version,
-     elixir: "~> 1.3",
-     compilers: Mix.compilers ++ [:nerves_package],
-     description: description(),
-     package: package(),
-     deps: deps(),
-     aliases: ["deps.precompile": ["nerves.env", "deps.precompile"]]]
+    [
+      app: @app,
+      version: @version,
+      elixir: "~> 1.4",
+      compilers: Mix.compilers() ++ [:nerves_package],
+      nerves_package: nerves_package(),
+      description: description(),
+      package: package(),
+      deps: deps(),
+      aliases: ["deps.precompile": ["nerves.env", "deps.precompile"]]
+    ]
   end
 
   def application do
     []
   end
 
+  def nerves_package do
+    [
+      type: :system,
+      artifact_url: [
+        "https://github.com/farmbot-labs/#{@app}/releases/download/v#{@version}/#{@app}-v#{@version}.tar.gz",
+
+      ],
+      platform: Nerves.System.BR,
+      platform_config: [
+        defconfig: "nerves_defconfig"
+      ],
+      checksum: package_files()
+    ]
+  end
+
   defp deps do
     [
-      {:nerves, "~> 0.7", runtime: false },
-      {:nerves_system_br, "~> 0.14.1", runtime: false },
-      {:nerves_toolchain_arm_unknown_linux_gnueabihf, "~> 0.11.0", runtime: false}
+      {:nerves, "~> 0.8", runtime: false},
+      {:nerves_system_br, "0.16.1-2017-11", runtime: false},
+      {:nerves_toolchain_arm_unknown_linux_gnueabihf, "~> 0.12.1", runtime: false},
+      {:nerves_system_linter, "~> 0.2.2", runtime: false}
     ]
   end
 
@@ -35,12 +55,30 @@ defmodule NervesSystemFarmbotBbb.Mixfile do
   end
 
   defp package do
-    [maintainers: ["Frank Hunleth", "Justin Schneck"],
-     files: ["rootfs_overlay", "bbb-busybox.config", "LICENSE",
-             "mix.exs", "nerves_defconfig", "nerves.exs", "README.md",
-             "VERSION", "fwup.conf", "post-createfs.sh", "post-build.sh", "uboot",
-             "uboot-script.cmd", "linux", "buildroot-packages"],
-     licenses: ["Apache 2.0"],
-     links: %{"Github" => "https://github.com/nerves-project/nerves_system_farmbot_bbb"}]
+    [
+      maintainers: ["Connor Rigby"],
+      files: package_files(),
+      licenses: ["Apache 2.0"],
+      links: %{"Github" => "https://github.com/farmbot-labs/#{@app}"}
+    ]
+  end
+
+  defp package_files do
+    [
+      "LICENSE",
+      "mix.exs",
+      "nerves_defconfig",
+      "README.md",
+      "VERSION",
+      "rootfs_overlay",
+      "fwup.conf",
+      "fwup-revert.conf",
+      "post-createfs.sh",
+      "post-build.sh",
+      "uboot",
+      "uboot-script.cmd",
+      "bbb-busybox.config",
+      "linux"
+    ]
   end
 end
