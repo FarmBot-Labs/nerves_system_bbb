@@ -1,10 +1,10 @@
-defmodule NervesSystemFarmbotBbb.Mixfile do
+defmodule NervesSystemBbb.MixProject do
   use Mix.Project
 
   @app :nerves_system_farmbot_bbb
   @version Path.join(__DIR__, "VERSION")
-    |> File.read!
-    |> String.trim
+           |> File.read!()
+           |> String.trim()
 
   def project do
     [
@@ -47,7 +47,7 @@ defmodule NervesSystemFarmbotBbb.Mixfile do
 
   defp deps do
     [
-      {:nerves, "~> 1.0-rc", runtime: false },
+      {:nerves, "~> 1.0-rc", runtime: false},
       {:nerves_system_br, "~> 1.0-rc", runtime: false},
       {:nerves_toolchain_arm_unknown_linux_gnueabihf, "~> 1.0-rc", runtime: false},
       {:nerves_system_linter, "~> 0.3.0", runtime: false},
